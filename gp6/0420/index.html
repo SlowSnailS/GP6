@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		
+		var str='dadf123dsafd33dfds;;;[]123dg;123';
+
+
+		// var arr = [];
+		// var temp = "";
+		// for(var i = 0 ; i < str.length ; i++){
+		// 	// console.log(str[i]);
+		// 	if(str[i] > 0 && str[i] < 9){
+		// 		temp += str[i];
+		// 	}else{
+		// 		if(temp != ""){
+		// 			arr.push(temp);
+		// 			temp = "";
+		// 		}
+		// 	}
+		// }
+		// if(temp){
+		// 	arr.push(temp);
+		// }
+		// console.log(str.match(/\d+/g))
+
+		// var reg = /\d{1,2}/g;
+		// console.log(str.match(reg))
+		// var reg = new RegExp("\\d+","g");
+		// console.log(reg);
+		// 量词 : + ? {20,30} {20,}
+
+		//1.规则;
+
+		//2.量词;
+		//3.修饰符;
+
+		var str = "淡淡交定金的算法张怀智度假杨怀志酒店就安静的王大喊大叫大家都觉得怀智李怀智的基督教基督教的说法赵怀智杨怀智的角度讲讲的发生钱怀智孙怀智"
+
+		// var reg = /杨怀智|张怀智|钱怀智/g;
+		// var reg = /[杨张钱]怀[智志]/g;
+		
+		var reg = /[^杨张钱]怀[智志]/g;
+
+		console.log(str.match(reg));
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

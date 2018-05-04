@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		
+		var str = "djjjdsfassdsafasfsssfdasfdsafsssdsafdsassdsfafasfsfasdfassss";
+
+
+		//匹配s位置的专用方法;	
+		// var reg = /s+/g;
+		// // console.log(str.search(reg));
+		// //exec;
+		// // console.log(reg.exec(str));
+		// // console.log(reg.exec(str));
+		// // console.log(reg.exec(str));
+		// // console.log(reg.exec(str));
+		// // console.log(reg.exec(str));
+		// // console.log(reg.exec(str));
+		// // console.log(reg.exec(str));
+		// // console.log(reg.exec(str));
+		// var s ;
+		// while(s = reg.exec(str)){
+		// 	console.log(s);
+		// }
+
+		var dateString = "2017d4~5";
+
+		//replace;
+
+		// console.log(dateString.replace(/[^0-9]/g,"/"));
+
+		//exec;
+
+		// var s ;
+
+		// var reg = /\d+/g;
+		// var res = [];
+		// while(s = reg.exec(dateString)){
+		// 	// console.log(s);
+		// 	res.push(s[0])
+		// }
+		// console.log(res.join("/"));
+
+		//选择器;
+
+		// querySelector();
+
+		// class  .
+
+		// id  # 
+  
+  		// tag; 英文字母;
+ 
+		//querySelector(); 其余的情况直接用这个去选择;
+
+		function $(selector){
+			//id选择器;
+			// 第一个字符必须为# ,第二个字符必须为 字母下划线$ , 可有可无的任意位数字字母下划线$;
+			if(/^#[a-zA-Z_\$]([\w\$]+)?$/.test(selector)){
+				// console.log("这是id选择器")
+				return document.getElementById(selector);
+			}
+			if(/^#[a-zA-Z_\$]([\w\$]+)?$/.test(selector)){
+			}
+		}
+
+		$("#11$dafadsdfas22333")
+
+
+	</script>
+</head>
+<body>
+	<input type="file" id="file">
+	<script>
+		//检查后缀;
+
+		// var oFile = document.getElementById("file");
+		//  oFile.onchange = function(){
+		// 	console.log(this.value);			
+		// }
+		var str = "            hello world        ";
+		// var reg = /^\s+/
+		var reg = /(^\s+)|(\s+$)/g ;
+
+		console.log(str.replace(reg,""));
+
+	</script>
+</body>
+</html>

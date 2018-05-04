@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style/carDetail.css">
+</head>
+<body>
+
+	<header>
+		购物车
+	</header>
+	<div class="container">
+		<ul id="list">
+			<!--
+				<li class="item">
+					详情区域
+					<div class="msg">
+						<img src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p480747492.webp" alt="">
+						<h5>肖申克的救赎</h5>
+					</div>
+					用户操作区域
+					<div class="operation">
+							<button>-</button>
+							<input type="text" value="10">
+							<button>+</button>
+					</div>
+					<a href="#javascript" class="delete">删除</a>
+				</li>
+			-->
+		</ul>
+	</div>
+	
+	<script src="libs/common.js"></script>
+	<script src="data/data.js"></script>
+	<script src="scripts/carDetail.js"></script>
+	<script>
+		
+		//给list 添加一个点击事件;
+
+		var aA = document.querySelectorAll(".delete");
+		oList.onclick = delegation(aA,removeCar);
+		function removeCar(){
+			var isRemove = confirm("确认删除该商品？");
+			//页面阻塞;
+			// console.log(isRemove);
+			//this;
+			// console.log(goodsId);
+			if(!isRemove) return 0;
+
+			var goodsId = this.parentNode.getAttribute("data-id");
+
+			var carListString = getCookie("carList");
+			var carListArray = JSON.parse(carListString);
+			// console.log(carListArray)
+			for(var i = 0 ; i < carListArray.length ; i++){
+				if(goodsId == carListArray[i].id){
+					carListArray.splice(i,1);
+					break;
+				}
+			}
+			// console.log(carListArray)
+			carListString = JSON.stringify(carListArray);
+			setCookie("carList",carListString);
+
+			location.reload();
+		}			
+	</script>
+</body>
+</html>

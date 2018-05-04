@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>瀑布流</title>
+	<link rel="stylesheet" href="style/index.css">
+</head>
+<body>
+	
+	<header>
+		这是头部
+	</header>
+
+	<div class="container">
+		
+	</div>
+	<script src="libs/ajax.js"></script>
+	<script>
+		
+		let box = `<div class="box">
+						<div class="img-box">
+							<img src="https://b-ssl.duitang.com/uploads/item/201805/01/20180501053820_wcnys.thumb.224_0.jpg" alt="">
+						</div>
+						<div class="msg">
+							<h2>标题</h2>
+						</div>
+					</div>`;
+
+		// 1. 加载数据;
+		// 1.2 渲染页面; 定位瀑布流;
+		// 2. 判定何时加载;
+	
+		function WaterFall(main_ele,url){
+			this.main_ele = document.querySelector(main_ele);
+			this.url = url;
+			if(!this.main_ele || !this.url) return ;
+			this.init();
+		}
+		
+		//1.加载数据;
+		//2.渲染页面;
+		WaterFall.prototype = {
+			constructor:WaterFall,
+			init(){
+				this.load_json()
+				.then(function(res){
+					res = JSON.parse(res);
+					this.render_page(res);
+					this.rank_box();				
+				}.bind(this))
+				.catch(function(){
+					this.load_error();
+				}.bind(this));
+			},
+			load_json(){ 
+				//正确获取接口数据;
+				//接口要使用的数据;
+				this.data = "limit=24&start=0";
+				return ajaxGet(this.url,this.data);
+			},
+			render_page(res){
+				// console.log(res);
+			    // let boxString = `<div class="box">
+				// 	<div class="img-box">
+				// 		<img src="https://b-ssl.duitang.com/uploads/item/201805/01/20180501053820_wcnys.thumb.224_0.jpg" alt="">
+				// 	</div>
+				// 	<div class="msg">
+				// 		<h2>标题</h2>
+				// 	</div>
+				// </div>`;
+				//遍历我们所需要的数据;
+				var boxList = "";
+				res.data.object_list.forEach(item => {
+					var prop = item.photo.width / 224;
+					var height = item.photo.height / prop;
+					boxString = `<div class="box">
+									<div class="img-box" style="width:224px;height:${height}px;">
+										<img src=${item.photo.path} alt="">
+									</div>
+									<div class="msg">
+										<h2>${item.msg}</h2>
+									</div>
+								</div>`;
+					boxList += boxString;
+				});
+				this.main_ele.innerHTML = boxList;
+			},
+			rank_box(){
+				var boxlist = this.main_ele.children;
+				this.heightArray = [];
+				// console.log(this.boxlist)
+				//区分第一排和其余的;
+				for(var i = 0 ; i < boxlist.length ; i++){
+					if(i < 5){
+						// console.log(boxlist[i]);
+						//记录第一排元素的高度;
+						this.heightArray.push(boxlist[i].offsetHeight);
+					}else{
+						//第二排;
+						// console.log(this.heightArray)
+						boxlist[i].style.position = "absolute";
+						var minHeight = Math.min.apply(false,this.heightArray);
+						var minIndex = this.heightArray.indexOf(minHeight);
+						minHeight = minHeight + 20;
+						boxlist[i].style.top = minHeight + "px";
+						boxlist[i].style.left = boxlist[minIndex].offsetLeft + "px";
+
+						this.heightArray[minIndex] = minHeight + boxlist[i].offsetHeight;
+					}
+				}
+			},
+			load_error(){
+				//负责报错;
+				alert("加载出错");
+			}
+
+		}
+
+		new WaterFall(".container","/duitang");
+
+	</script>
+</body>
+</html>	

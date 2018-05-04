@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style/carDetail.css">
+</head>
+<body>
+
+	<header>
+		购物车
+	</header>
+	<div class="container">
+		<ul id="list">
+			
+				<li class="item">
+					<div class="msg">
+						<img src="https://img3.doubanio.com/view/photo/s_ratio_poster/public/p480747492.webp" alt="">
+						<h5>肖申克的救赎</h5>
+					</div>
+					<div class="operation">
+							<button>-</button>
+							<input type="text" value="10">
+							<button>+</button>
+					</div>
+					<a href="#javascript" class="delete">删除</a>
+				</li>
+			
+		</ul>
+	</div>
+	
+	<script src="libs/common.js"></script>
+	<script src="data/data.js"></script>
+	<script src="scripts/carDetail.js"></script>
+	<script>
+		
+		var oLi = list.children[0];
+		for(var i = 0 ; i < 10 ; i++){
+			// console.log(oLi.cloneNode(true));
+			list.appendChild(oLi.cloneNode(true))
+		}
+
+	</script>
+</body>
+</html>

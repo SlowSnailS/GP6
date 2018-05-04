@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul id="list">
+		<li>这里是一些内容</li>
+		<li>这里是一些内容</li>
+		<li>这里是一些内容</li>
+		<li>这里是一些内容</li>
+	</ul>
+
+	<script>
+			
+		function detegation(child,callback){
+			//1.必须是合法元素集合;
+			//2.必须在绑定事件的元素的子集;
+			var child = [].slice.call(child);
+			return function(e){
+				var evt = e || widnow.event;
+				var target = evt.target || evt.srcElement;
+				// alert(1);
+				if(child.indexOf(target) != -1){
+					//执行事件处理函数;
+					callback.call(target,evt);
+					//call第一个参数改变了this指向;
+					//call第二个对应第一个形参，依次类推;
+				}
+			}
+		}
+
+		var oList = document.getElementById("list");
+		var aLi = oList.children;
+
+		oList.onclick = detegation(aLi,function(e){
+			var oInput = document.createElement("input");
+			var sLi = this.innerHTML;
+			this.innerHTML = "";
+			oInput.value = sLi;
+			var that = this; //this => 当前点击的li;
+			oInput.onblur = function(){
+				// this => 指向当前的input;
+				that.innerHTML = this.value;
+			}
+			this.appendChild(oInput);
+		});
+
+	</script>
+</body>
+</html>

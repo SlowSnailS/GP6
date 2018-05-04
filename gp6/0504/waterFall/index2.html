@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>瀑布流</title>
+	<link rel="stylesheet" href="style/index.css">
+</head>
+<body>
+	
+	<header>
+		这是头部
+	</header>
+
+	<div class="container">
+		
+	</div>
+	<script src="libs/ajax.js"></script>
+	<script>
+		// let box = `<div class="box">
+		// 				<div class="img-box">
+		// 					<img src="https://b-ssl.duitang.com/uploads/item/201805/01/20180501053820_wcnys.thumb.224_0.jpg" alt="">
+		// 				</div>
+		// 				<div class="msg">
+		// 					<h2>标题</h2>
+		// 				</div>
+		// 			</div>`;
+
+        function WatherFall(main_select,url){
+        	//参数判断!;
+            this.url = url;
+            this.main_ele = document.querySelector(main_select);
+            if(!this.url || !this.main_ele) return 0;
+            this.init();
+        }
+
+        WatherFall.prototype = {
+        	constructor:WatherFall,
+        	init(){
+				this.loding = false;
+        		this.load_json()//promise;
+        		.then(function(res){
+        			res = JSON.parse(res);
+        			this.render_page(res);
+        			this.rank_box();
+        		}.bind(this))
+        		.catch(function(){
+        			this.load_error();
+				}.bind(this));
+				window.onscroll = function(){
+					if(this.loding) return;
+					if(this.start_load()) {
+						this.loding = true;
+						this.load_json().then(function(res){
+							this.loding = false;
+							res = JSON.parse(res);
+							this.render_page(res);
+        					this.rank_box();
+							// console.log(res);	
+						}.bind(this))
+					}
+				}.bind(this)
+        	},
+        	render_page(res){
+        		var json = res.data.object_list;
+        		// console.log(json);
+        		var boxList = "";
+        		json.forEach(function(item){
+        			var prop = item.photo.width / 224;
+					var height = item.photo.height / prop;
+					boxString = `<div class="box">
+									<div class="img-box" style="width:224px;height:${height}px;">
+										<img src=${item.photo.path} alt="">
+									</div>
+									<div class="msg">
+										<h2>${item.msg}</h2>
+									</div>
+								</div>`;
+					boxList += boxString;
+        		})
+        		this.main_ele.innerHTML += boxList;
+        	},
+        	rank_box(){
+        		var boxList = this.main_ele.children;
+        		var heightArray = [];
+        		for(var i = 0 ; i < boxList.length ; i++){
+        			if(i < 5){
+        				//第一排的元素;
+        				heightArray.push(boxList[i].offsetHeight);
+        			}else{
+        				boxList[i].style.position = "absolute";
+        				//其余的要被排列的元素;
+        				var minHeight = Math.min.apply(false,heightArray);
+        				var minIndex = heightArray.indexOf(minHeight);
+        				minHeight = minHeight + 20;
+        				boxList[i].style.top = minHeight + "px";
+        				boxList[i].style.left = boxList[minIndex].offsetLeft + "px";
+
+        				heightArray[minIndex] = minHeight + boxList[i].offsetHeight;
+        			}
+        		}
+
+        	},
+        	load_json(){
+        		this.data = "limit=24&start=0";
+				return ajaxGet(this.url,this.data)//promise对象;      		
+			},
+			start_load(){
+				//判断什么时候该加载;
+				//最后一张的高度;
+				var boxList = this.main_ele.children;
+				var last_ele = boxList[boxList.length - 1];
+				var last_top = last_ele.offsetTop;
+
+				//滚动的高度; 页面的高度;
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+				var clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+				
+				if(scrollTop + clientHeight > last_top){
+				
+					return true;
+				}
+				return false;
+			},
+        	load_error(){
+        	}
+        }
+
+        new WatherFall(".container","/duitang")
+	
+
+	</script>
+</body>
+</html>	

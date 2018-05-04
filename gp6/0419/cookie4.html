@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		
+		//设置一个cookie name : user value:yanghuaizhi 过期时间为 5天后 path设置为根目录 / ; 
+
+		
+		// document.cookie = "user=yanghuaizhi;path=/;expires="+d;
+		// var cookieMain = "user=yanghuaizhi;"
+		
+		// if(我需要设置path){
+		// 	cookieMain = cookieMain + ";path=/"
+		// }
+
+		// if(我需要设置express){
+		// 	var d = new Date();
+		// 	d.setDate(d.getDate() + 5);
+		// 	cookieMain = cookieMain + ";expires="+d;
+		// }
+
+		// document.cookie = str;
+
+		function setCookie(name,value,options){
+			//options => 可选参数; 非必填;
+			/*{
+				expires:选填
+				path:选填
+			}
+			*/
+			if(!name || !value){
+				return 0; //必选参数为空,没法继续设置cookie;
+			}
+			var cookieString ; //最终拼接的字符串;
+			cookieString = name+"="+value;
+			if(!(options instanceof Object)){
+				//如果配置参数没有传递，咱们代码不用继续执行，利用现有字符串设置cookie即可。
+				document.cookie = cookieString;
+				return 0;
+			}
+			if(typeof options.expires == "number"){
+				var d = new Date();
+				d.setDate(d.getDate() + options.expires);
+				cookieString += ";expires="+d;
+			}
+			if(typeof options.path == "string"){
+				cookieString += ";path="+options.path;
+			}
+			document.cookie = cookieString;
+		}
+		// setCookie("1","10",{path:"/",expires:3});
+		function removeCookie(name,options){
+			var obj = {
+				expires:-1
+			}
+			options.path ? obj.path = options.path : "";
+			setCookie(name," ",obj)
+		}
+
+		
+	</script>
+</body>
+</html>

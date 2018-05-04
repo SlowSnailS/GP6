@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		// 电话号码练习;
+
+		// 18519099212
+
+		// 185 => 归属地;
+
+		//开头第一位代表城市; 1.北京; 2.深圳  3.上海  4.广州  5.天津
+		//联通号段: 130,131,132,155,156,186,185
+
+		//电信号段:
+		// 133,153,189,180
+
+		//移动号段:
+		//139、138、137、136、135、134、159、158、157、152、151、150、188、187	
+
+		// () => 1.运算顺序; 2.配合 replace 方法中的 $ 使用;
+		// \ 转义字符;
+		// ? 可有可无;
+
+		// ^ $;
+		// var phoneReg = /^(\+86-)?(13[0-9]|15[123567890]|18[567890])[12345]\d{7}$/;
+		// // 加了开头 不要加 g; 
+		// var phoneNumber = "+86-18529099212";
+		// //test;
+		// console.log(phoneReg.test(phoneNumber));
+
+		// if(phoneReg.test(phoneNumber)){
+		// 	//查询号码归属地;
+		// 	var numberFromReg = /^(\+86-)?\d{3}(\d{2})\d{6}$/
+		// 	var city = phoneNumber.replace(numberFromReg,"$2");
+		// 	console.log(city);
+		// 	switch (parseInt(city)) {
+		// 		case 1:
+		// 			alert("北京")
+		// 			break;
+		// 		case 2:
+		// 			alert("深圳")
+		// 			break;
+		// 		case 3:
+		// 			alert("上海")
+		// 			break;
+		// 		case 4:
+		// 			alert("广州")
+		// 			break;
+		// 		case 5:
+		// 			alert("天津")
+		// 			break;
+		// 		default:
+		// 			alert("未知归属地")
+		// 			break;
+		// 	}
+		// }
+
+		//邮箱号;
+		// 6~18个字符，可使用字母、数字、下划线，需以字母开头
+		//数字 字母 _  @ 数字字母 . 字母 2 到 6位;
+
+		// var emailReg = /^[a-zA-Z]\w{5,17}@(vip\.)?[0-9a-zA-Z]{2,8}\.[a-z]{2,6}$/;
+		// // 931673916@qq.com
+		// // 931673916@vip.qq.com;
+		// var str = "931673916@qq.com"
+		// console.log(emailReg.test(str));
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

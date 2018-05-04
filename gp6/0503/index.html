@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<script>
+		
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET","/zcool?pageSize=20&contentId=6372959_3&day=2018-05-03?page=2");
+
+		xhr.send(null);
+		xhr.onload = function(){
+			if(xhr.status == 200){
+				console.log(JSON.parse(xhr.responseText));
+			}
+		}
+
+
+	</script>
+</body>
+</html>

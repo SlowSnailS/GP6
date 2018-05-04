@@ -1,0 +1,73 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	background: rgba(0,0,0,.3);
+}
+li{
+	list-style: none;
+}
+header{
+	line-height: 80px;
+	text-align: center;
+	background: #999;
+	color: #fff;
+}
+.container{
+	width: 1120px;
+	margin: 0 auto;
+	background: #fff;
+	padding: 5px;
+}
+.item{
+	box-sizing: border-box;
+	padding: 10px;
+	height: 224px;
+	width: 100%;
+	background: #fff;
+}
+.item .msg ,.item .operation{
+	float: left;
+}
+.item .msg:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+.item .msg img{
+	width: 138px;
+	height: 204px;
+	float: left;
+}
+.item .msg h5{
+	display: block;
+	text-align: center;
+	width: 400px;
+	float:left;
+	margin-top: 90px;
+	padding-left: 5px;
+}
+.operation:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+.operation {
+	float: left;
+	padding-left: 80px;
+	margin-top: 90px;
+}
+.operation input{
+	width: 40px;
+	text-align: center;
+}
+.operation button{
+	padding: 0 5px;
+}
+.delete{
+	float: right;
+	padding-right: 80px;
+	margin-top: 90px;
+}
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style/index.css">
+</head>
+<body>
+	
+	<div class="car">
+		<span>0</span>
+	</div>
+	
+	<header>
+		<h2>购物车</h2>
+	</header>
+	<div class="goodsList">
+		<ul id="wrap">
+		</ul>
+	</div>
+	<script src="data/data.js"></script>
+	<script src="libs/common.js"></script>
+	<script src="scripts/index2.js"></script>
+	<script src="scripts/index3.js"></script>
+	<script>
+		//购物数量;
+		function carNum(el){
+			var carListString = getCookie("carList");
+			var carListArray = JSON.parse(carListString);
+			// console.log(carListArray)
+			var num = 0;
+			for(var i = 0 ; i < carListArray.length ; i++){
+				num += parseInt(carListArray[i].num);
+			}
+
+			el.innerHTML = num;
+			// console.log(num);
+		}
+		var car = document.querySelector(".car").children[0];
+		carNum(car);
+
+		//跳转到购物车的详情页;
+		car.onclick = function(){
+			location.href = "carDetail.html"
+		}
+	</script>
+</body>
+</html>

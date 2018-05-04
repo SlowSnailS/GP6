@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+	<p>账号: <input type="text" id="user"></p>
+	<p>密码: <input type="password" id="pw"></p>
+	<p><input type="checkbox" id="checkbox">十五天免登陆</p>
+	<button id="btn">登陆</button>
+	<script src="cookie.js"></script>
+	<script>
+		//当点击登陆的时候,判定checkbox是否被点击;
+		//如果被选中将 input 中的内容放入cookie中;
+		var oBtn = document.getElementById("btn");
+		var oCheckbox = document.getElementById("checkbox");
+		var oUser = document.getElementById("user");
+		var oPw = document.getElementById("pw");
+		oBtn.onclick = function(){
+			// if(oCheckbox.checked){
+			// 	//储存cookie;
+			// }
+			if(!oCheckbox.checked) return 0;
+
+			setCookie("user",oUser.value,{
+				expires:15
+			})
+			setCookie("pw",oPw.value,{
+				expires:15
+			})
+		}
+		var loginMsg = {
+			user:getCookie("user"),
+			pw:getCookie("pw")
+		}
+		if(loginMsg.user && loginMsg.pw){
+			oUser.value = loginMsg.user;
+			oPw.value = loginMsg.pw
+		}	
+
+
+	</script>
+</body>
+</html>

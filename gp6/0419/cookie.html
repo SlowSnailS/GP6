@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//！document.cookie每次只能设置一条cookie;
+		// var d = new Date();
+		// d.setDate(d.getDate() + 5)
+		// document.cookie = "name=yanghuaizhi1210;path=/gp6;expires="+d;
+		// document.cookie = "age=16";
+
+		function setCookie(cookieName,cookieValue,options){
+			var d = new Date();
+			d.setDate(d.getDate() + options.expres);
+			document.cookie = cookieName+"="+cookieValue+";path="+options.path+";expires="+d;
+		}
+
+		var options = {
+			expires:6
+		}
+		setCookie("pw","123456",options);
+
+
+	</script>
+</body>
+</html>

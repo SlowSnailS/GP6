@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		
+		//问题一；请讲一下回调函数部分
+
+		//利用事件委托， 绑定事件给父级， 当子集触发事件的时候， 弹出当前子集的内容;
+
+		var oList = document.getElementById("list");
+		var aLi = document.getElementsByClassName("handle");
+		oList.onclick = detegation(aLi,function(e){
+			console.log(this,e);
+		});
+		//1.辨别;
+		//2.事件触发之后要干啥,执行事件处理函数;
+		function detegation(child,callback){
+			//1.必须是合法元素集合;
+			//2.必须在绑定事件的元素的子集;
+			var child = [].slice.call(child);
+			return function(e){
+				var evt = e || widnow.event;
+				var target = evt.target || evt.srcElement;
+				// alert(1);
+				if(child.indexOf(target) != -1){
+					//执行事件处理函数;
+					callback.call(target,evt);
+					//call第一个参数改变了this指向;
+					//call第二个对应第一个形参，依次类推;
+				}
+			}
+		}
+
+ 	//  问题二  callback.call(target,e);这个是什么意思  作用是啥
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
